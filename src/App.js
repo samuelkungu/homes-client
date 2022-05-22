@@ -1,5 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './app.scss';
+import Home from "./pages/home/Home";
+import Hostel from "./pages/hostel/Hostel";
+import List from "./pages/list/List";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
