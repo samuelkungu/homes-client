@@ -1,0 +1,50 @@
+.footer {
+    width: 100%;
+    max-width: 1024px;
+    font-size: 12px;
+    display: flex;
+}
+
+.f-container {
+    flex: 3;
+    margin-right: 30px;
+    padding: 0px 10px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+    & h1 {
+        font-size: 19px;
+    }
+
+    .f-text {
+        font-size: 15px;
+        font-weight: 400;
+        margin: 10px 0px;
+
+    }
+
+    .fText {
+        margin-top: 20px;
+    }
+}
+
+.f-lists {
+    flex: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.f-l {
+    list-style: none;
+    padding: 0;
+}
+
+.f-l-item {
+    margin-bottom: 10px;
+    color: #003580;
+    cursor: pointer;
+}
