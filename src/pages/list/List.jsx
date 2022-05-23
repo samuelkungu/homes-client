@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import "./list.css"
-import Topbar from "../../components/topbar/Topbar";
+import "./list.scss"
+import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from 'react-router';
 import { format } from "date-fns";
 import { DateRange } from 'react-date-range';
 import SearchItem from '../../components/searchItem/SearchItem';
-import useFetch from "../../hooks/useFetch"
+// import useFetch from "../../hooks/useFetch"
 
 function List() {
 
@@ -20,17 +20,17 @@ function List() {
     const [min, setMin] = useState(undefined);
     const [max, setMax] = useState(undefined);
 
-    const [data, loading, error, reFetch] = useFetch(
-        `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
-    );
+    // const [data, loading, error, reFetch] = useFetch(
+    //     `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
+    // );
 
     const handleClick = () => {
-        reFetch();
+        // reFetch();
     };
 
     return (
         <div>
-            <Topbar />
+            <Navbar />
             <Header type="list" />
 
             <div className="list-container">
