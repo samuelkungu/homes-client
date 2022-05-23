@@ -1,17 +1,36 @@
 import './header.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBed, faBuilding, faCashRegister, faHouse, faShop } from '@fortawesome/free-solid-svg-icons'
+import { faBed, faBuilding, faShop } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select'
 
 function Header({ type }) {
 
-    const [openArea, setOpenArea] = useState(false);
-    const [area, setArea] = useState("Location");
-    const [openProperty, setOpenProperty] = useState(false);
-    const [property, setProperty] = useState("Property type");
-    const [openBudget, setOpenBudget] = useState(false);
-    const [budget, setBudget] = useState(3000);
 
+    const area = [
+        { value: 'bomas', label: 'Bomas' },
+        { value: 'kahawa', label: 'Kahawa' },
+        { value: 'nyeriview', label: 'Nyeri View' }
+    ]
+
+    const property = [
+        { value: 'bedsitter', label: 'Bedsitter' },
+        { value: 'singleroom', label: 'Single Room' },
+        { value: 'doubleroom', label: 'Double Room' }
+    ]
+
+    const budget = [
+        { value: '3000', label: 'Below 3k' },
+        { value: '5000', label: 'Below 5k' },
+        { value: '5001', label: 'more than 5k' }
+    ]
+
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+        navigate("/hostels", { state: { area, property, budget } })
+    };
 
     return (
         <div className='header'>
@@ -43,45 +62,19 @@ function Header({ type }) {
 
                     <div className="search">
                         <div className="search-item">
-                            <FontAwesomeIcon icon={faBed} className="header-icon" />
-                            <span className="search-text" onClick={() => setOpenArea(!openArea)}>{area}</span>
-                            {openArea && <div className="options">
-                                <div className="option-item">
-                                    <button className="options-btn" value="Bomas" onClick={(e) => setArea(e.target.value)} >Bomas</button>
-                                    <button className="options-btn" value="Kahawa" onClick={(e) => setArea(e.target.value)} >Kahawa</button>
-                                    <button className="options-btn" value="Nyeri View" onClick={(e) => setArea(e.target.value)}  >Nyeri View</button>
-                                </div>
-                            </div>}
+                            <Select options={area} className="options" placeholder='Destination' />
                         </div>
 
                         <div className="search-item">
-                            <FontAwesomeIcon icon={faHouse} className="header-icon" />
-                            <span className="search-text" onClick={() => setOpenProperty(!openProperty)}>{property}</span>
-                            {openProperty && <div className="options">
-                                <div className="option-item">
-                                    <button className="options-btn" value="Bedsitter" onClick={(e) => setProperty(e.target.value)} >Bedsitter</button>
-                                    <button className="options-btn" value="Single Room" onClick={(e) => setProperty(e.target.value)} >Single Room</button>
-                                    <button className="options-btn" value="Double Room" onClick={(e) => setProperty(e.target.value)} >Double Room</button>
-                                </div>
-                            </div>}
-
+                            <Select options={property} className="options" placeholder='Property Type' />
                         </div>
 
                         <div className="search-item">
-                            <FontAwesomeIcon icon={faCashRegister} className="header-icon" />
-                            <span className="search-text" onClick={() => setOpenBudget(!openBudget)}>Kshs. {budget}</span>
-                            {openBudget && <div className="options">
-                                <div className="option-item">
-                                    <button className="options-btn" value={3000} onClick={(e) => setBudget(e.target.value)} >Below 3k</button>
-                                    <button className="options-btn" value={5000} onClick={(e) => setBudget(e.target.value)} >Below 5k</button>
-                                    <button className="options-btn" value={5001} onClick={(e) => setBudget(e.target.value)} >more than 5k</button>
-                                </div>
-                            </div>}
-
+                            <Select options={budget} className="options" placeholder='Your budget' />
                         </div>
 
                         <div className="search-item">
-                            <button className="btn">Search</button>
+                            <button onClick={handleSearch} className="btn">Search</button>
                         </div>
 
                     </div>

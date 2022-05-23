@@ -63,72 +63,33 @@
 
 
             .search-item {
-                display: flex;
+                display: flex !important;
                 align-items: center;
-                gap: 10px;
+                justify-content: space-between;
+                gap: 30px;
                 height: 30px;
                 margin-left: 20px;
-
-                .search-text {
-                    cursor: pointer;
-                    color: rgb(0, 0, 0);
-                    width: 150px;
-                }
 
                 .header-icon {
                     color: rgb(100, 100, 100);
                 }
 
-
                 .options {
                     z-index: 2;
                     position: absolute;
-                    top: 50px;
-                    background-color: white;
-                    color: gray;
-                    border-radius: 5px;
-                    box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.75);
-                    -webkit-box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.75);
-                    -moz-box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.75);
-
-
-                    .option-item {
-                        width: 200px;
-                        display: flex;
-                        justify-content: space-between;
-                        flex-direction: column;
-                        margin: 10px 0px;
-
-                        .options-btn {
-                            margin: 2px 0px;
-                            padding-left: 15px;
-                            font-size: 15px;
-                            font-weight: 400;
-                            background-color: white;
-                            color: black;
-                            border: none;
-                            display: flex;
-                            justify-content: start;
-                            cursor: pointer;
-
-                            &:hover {
-                                color: white;
-                                background-color: #0071c2;
-                                transition: .1s;
-                            }
-                        }
-                    }
+                    width: 200px;
+                    background-color: rgb(255, 255, 255);
+                    color: rgb(66, 66, 66);
+                    border-radius: 50px;
 
                 }
 
-
             }
+
+
+
 
         }
 
-
-
-
     }
-
 }
