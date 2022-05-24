@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
-import './login.scss'
+import './register.scss'
 
-function Login() {
+function Register() {
     const [inputs, setInputs] = useState({
         email: "",
+        phone: "",
         password: "",
     });
 
@@ -17,15 +18,21 @@ function Login() {
         <div>
             <Navbar type="auth" />
 
-            <div className='login'>
-                <div className="login-container">
+            <div className='register'>
+                <div className="register-container">
 
                     <div className="form">
-                        <div className="heading">Sign In</div>
+                        <div className="heading">Create an account</div>
                         <div className="form-item">
                             <label className="label">Email address</label>
                             <input name="email" type="text" className="input" placeholder="Enter your email"
                                 id="email" value={inputs.email} onChange={handleInputChange} />
+                        </div>
+
+                        <div className="form-item">
+                            <label className="label">Phone</label>
+                            <input name="phone" type="text" className="input" placeholder="Enter your phone number"
+                                id="phone" value={inputs.phone} onChange={handleInputChange} />
                         </div>
 
                         <div className="form-item">
@@ -34,11 +41,12 @@ function Login() {
                                 id="password" value={inputs.password} onChange={handleInputChange} />
                         </div>
 
-                        <button className="btn">Sign in</button>
+                        <button className="btn">Create Account</button>
                     </div>
 
                     <div className="sub-note">
-
+                        By creating an account, you agree with our Terms
+                        & conditions and Privacy statement
                     </div>
                 </div>
 
@@ -47,4 +55,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register

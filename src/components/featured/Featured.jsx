@@ -1,13 +1,16 @@
-
+import React from 'react'
+import useFetch from '../../hooks/useFetch'
 import "./featured.scss"
 
 function Featured() {
 
-
+    const { data, loading, error } = useFetch(
+        "/hostels/countbyarea?areas=Bomas,Kahawa,NyeriView"
+    );
 
     return (
         <div className='featured'>
-            {(
+            {loading ? ("Loading please wait") : (
                 <>
                     <div className="featured-item">
                         <img
@@ -16,7 +19,7 @@ function Featured() {
                             className="featured-img" />
                         <div className="featured-title">
                             <h1>Bomas</h1>
-                            <h2>233 properties</h2>
+                            <h2>{data[0]} properties</h2>
                         </div>
                     </div>
                     <div className="featured-item">
@@ -26,7 +29,7 @@ function Featured() {
                             className="featured-img" />
                         <div className="featured-title">
                             <h1>Kahawa</h1>
-                            <h2>333 properties</h2>
+                            <h2>{data[1]} properties</h2>
                         </div>
                     </div>
                     <div className="featured-item">
@@ -36,7 +39,7 @@ function Featured() {
                             className="featured-img" />
                         <div className="featured-title">
                             <h1>Nyeri View</h1>
-                            <h2>333 properties</h2>
+                            <h2>{data[2]} properties</h2>
                         </div>
                     </div>
                 </>

@@ -19,13 +19,7 @@ function List() {
     const [min, setMin] = useState(undefined);
     const [max, setMax] = useState(undefined);
 
-    const [data, loading, error, reFetch] = useFetch(
-        `/hostels`
-    );
 
-    const handleClick = () => {
-        reFetch();
-    };
 
     return (
         <div>
@@ -63,16 +57,10 @@ function List() {
 
                             </div>
                         </div>
-                        <button onClick={handleClick} >Search</button>
+                        <button  >Search</button>
                     </div>
 
                     <div className="list-result">
-                        {loading ? "Loading" :
-                            <>
-                                {data.map(item => (
-                                    <SearchItem item={item} key={item._id} />
-                                ))}
-                            </>}
 
                     </div>
 

@@ -1,7 +1,7 @@
 import './navbar.scss'
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ type }) {
     return (
         <div className='navbar'>
             <div className="nav-container">
@@ -9,10 +9,17 @@ function Navbar() {
                     <span className="logo">Dekut Homes</span>
                 </Link>
 
-                <div className="nav-items">
-                    <button className="nav-btn">Register</button>
-                    <button className="nav-btn">Login</button>
-                </div>
+                {type !== "auth" && <>
+                    <div className="nav-items">
+                        <Link to="/register" className='link'>
+                            <button className="nav-btn">Register</button>
+                        </Link>
+                        <Link to="/login" className='link'>
+                            <button className="nav-btn">Login</button>
+                        </Link>
+                    </div>
+                </>}
+
             </div>
         </div>
     )

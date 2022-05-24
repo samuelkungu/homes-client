@@ -12,16 +12,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    color: #001e49;
 
 
     & h1 {
-        font-size: 19px;
+        font-size: 17px;
     }
 
     .f-text {
         font-size: 15px;
-        font-weight: 400;
-        margin: 10px 0px;
+        font-weight: 500;
+        margin: 2px 0px 10px 0px;
 
     }
 
