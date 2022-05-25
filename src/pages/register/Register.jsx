@@ -10,9 +10,14 @@ function Register() {
     });
 
     const handleInputChange = (e) => {
+        e.preventDefault()
         const { name, value } = e.target;
         setInputs((prev) => ({ ...prev, [name]: value }));
     };
+
+    const handleSubmit = () => {
+        console.log(inputs);
+    }
 
     return (
         <div>
@@ -41,7 +46,7 @@ function Register() {
                                 id="password" value={inputs.password} onChange={handleInputChange} />
                         </div>
 
-                        <button className="btn">Create Account</button>
+                        <button className="btn" onClick={handleSubmit} >Create Account</button>
                     </div>
 
                     <div className="sub-note">

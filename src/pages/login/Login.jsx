@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userLogin } from "../../redux/actions/userActions";
 import Navbar from '../../components/navbar/Navbar';
 import './login.scss'
 
@@ -9,9 +13,15 @@ function Login() {
     });
 
     const handleInputChange = (e) => {
+        e.preventDefault()
         const { name, value } = e.target;
         setInputs((prev) => ({ ...prev, [name]: value }));
     };
+
+    const handleSubmit = () => {
+        console.log(inputs);
+    }
+
 
     return (
         <div>
@@ -34,7 +44,7 @@ function Login() {
                                 id="password" value={inputs.password} onChange={handleInputChange} />
                         </div>
 
-                        <button className="btn">Sign in</button>
+                        <button className="btn" onClick={handleSubmit} >Sign in</button>
                     </div>
 
                     <div className="sub-note">
