@@ -19,7 +19,9 @@ function List() {
     const [min, setMin] = useState(undefined);
     const [max, setMax] = useState(undefined);
 
-
+    const { data, loading, error, reFetch } = useFetch(
+        `/hostels?areas=${area}&min=${min || 0}&max=${max || 99999}`
+    );
 
     return (
         <div>
@@ -61,7 +63,15 @@ function List() {
                     </div>
 
                     <div className="list-result">
-
+                        {loading ? (
+                            "loading"
+                        ) : (
+                            <>
+                                {data.map((item) => (
+                                    <SearchItem item={item} key={item._id} />
+                                ))}
+                            </>
+                        )}
                     </div>
 
                 </div>

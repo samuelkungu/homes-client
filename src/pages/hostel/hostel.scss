@@ -1,0 +1,154 @@
+.hostel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.hostel-wrapper {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.book-now {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hostel-title {
+  font-size: 24px;
+}
+
+.hostel-address {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hostel-distance {
+  color: #0071c2;
+  font-weight: 500;
+}
+
+.hostel-price-highlight {
+  color: #008009;
+  font-weight: 500;
+}
+
+.hostel-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.hostel-img-wrapper {
+  width: 33%;
+}
+
+.hostel-img {
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.hostel-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.hostel-details-texts {
+  flex: 3;
+}
+
+.hostel-desc {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.hostel-details-price {
+  flex: 1;
+  background-color: #ebf3ff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hostel-details-price>h1 {
+  font-size: 18px;
+  color: #555;
+}
+
+.hostel-details-price>span {
+  font-size: 14px;
+}
+
+.hostel-details-price>h2 {
+  font-weight: 300;
+}
+
+.hostel-details-price>button {
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.slider {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.613);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+}
+
+.slider-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-img {
+  width: 80%;
+  height: 80vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.arrow {
+  margin: 20px;
+  font-size: 50px;
+  color: lightgray;
+  cursor: pointer;
+}

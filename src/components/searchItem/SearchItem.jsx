@@ -2,41 +2,28 @@ import "./searchItem.scss";
 import { Link } from "react-router-dom";
 
 
-const SearchItem = (item) => {
+const SearchItem = ({ item }) => {
     return (
         <div className="searchItem">
-            <img
-                src={item.photos[0]}
-                alt=""
-                className="si-img"
-            />
-            <div className="si-desc">
+            <img src={item.photos[0]} alt="" className="si-img" />
+            <div className="si-description">
                 <h1 className="si-title">{item.name}</h1>
-                <span className="si-distance">{item.distance}</span>
-                <span className="si-taxi">Free airport taxi</span>
-                <span className="si-subtitle">
-                    Studio Apartment with Air conditioning
-                </span>
-                <span className="si-features">
-                    {item.description}
-                </span>
-                <span className="si-cancel">Free cancellation </span>
+                <span className="si-features"> {item.desc} </span>
+                <span className="si-distance">  {item.address} </span>
+                <span className="si-subtitle">  {item.address} , {item.distance}  metres </span>
                 <span className="si-cancel-subtitle">
-                    You can cancel later, so lock in this great price today!
+                    You can cancel later, so look at this great property today!
                 </span>
             </div>
             <div className="si-details">
-                {item.rating &&
-                    <div className="si-rating">
-                        <span>Excellent</span>
-                        <button>{item.rating}</button>
-                    </div>}
-                <div className="si-detail-texts">
-                    <span className="si-price">${item.cheapestprice}</span>
+                <div className="price">
+                    <span className="si-price"><small>Kshs. </small>{item.cheapestPrice}</span>
                     <span className="si-tax">Includes taxes and fees</span>
-                    <Link to={`/hotels/${item._id}`}> <button className="si-check-button">See availability</button>
-                    </Link>
+                </div>
 
+                <div className="si-detail-texts">
+                    <Link to={`/hostels/${item._id}`}> <button className="si-check-button">See availability</button>
+                    </Link>
                 </div>
             </div>
         </div>

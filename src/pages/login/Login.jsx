@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userLogin } from "../../redux/actions/userActions";
 import Navbar from '../../components/navbar/Navbar';
 import './login.scss'
 

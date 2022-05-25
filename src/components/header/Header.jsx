@@ -7,29 +7,46 @@ import Select from 'react-select'
 
 function Header({ type }) {
 
-
-    const area = [
+    const place = [
         { value: 'bomas', label: 'Bomas' },
         { value: 'kahawa', label: 'Kahawa' },
         { value: 'nyeriview', label: 'Nyeri View' }
-    ]
+    ];
 
     const property = [
         { value: 'bedsitter', label: 'Bedsitter' },
         { value: 'singleroom', label: 'Single Room' },
         { value: 'doubleroom', label: 'Double Room' }
-    ]
+    ];
 
     const budget = [
         { value: '3000', label: 'Below 3k' },
         { value: '5000', label: 'Below 5k' },
         { value: '5001', label: 'more than 5k' }
-    ]
+    ];
+
+    const [area, setArea] = useState(null)
+    const [room, setRoom] = useState(null)
+    const [amount, setAmount] = useState(null)
+
+
+    // const [selected, setSelected] = useState({
+    //     place: null,
+    //     property: null,
+    //     budget: null,
+    // })
+
+    const handleChange = (area, room, amount) => {
+        setArea(area);
+        setRoom(room)
+        setAmount(amount)
+        console.log({ area, room, amount });
+    };
 
     const navigate = useNavigate();
 
     const handleSearch = () => {
-        navigate("/hostels", { state: { area, property, budget } })
+        navigate("/hostels", { state: { place, property, budget } })
     };
 
     return (
@@ -62,15 +79,15 @@ function Header({ type }) {
 
                     <div className="search">
                         <div className="search-item">
-                            <Select options={area} className="options" placeholder='Destination' />
+                            <Select options={place} onChange={handleChange} className="options" placeholder='Destination' />
                         </div>
 
                         <div className="search-item">
-                            <Select options={property} className="options" placeholder='Property Type' />
+                            <Select options={property} onChange={handleChange} className="options" placeholder='Property Type' />
                         </div>
 
                         <div className="search-item">
-                            <Select options={budget} className="options" placeholder='Your budget' />
+                            <Select options={budget} onChange={handleChange} className="options" placeholder='Your budget' />
                         </div>
 
                         <div className="search-item">
