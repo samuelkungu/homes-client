@@ -20,7 +20,7 @@ function FeaturedProperties() {
                             />
                             <span className="fp-name">{item.name}</span>
                             <span className="fp-area">{item.area}</span>
-                            <span className="fp-price">Starting from ${item.cheapestPrice}</span>
+                            <span className="fp-price">Starting from kshs. {item.cheapestPrice}</span>
                             {item.rating && <div className="fp-rating">
                                 <button>{item.rating}</button>
                                 <span>Excellent</span>

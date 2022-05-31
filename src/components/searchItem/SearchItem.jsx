@@ -22,8 +22,8 @@ const SearchItem = ({ item }) => {
                 </div>
 
                 <div className="si-detail-texts">
-                    <Link to={`/hostels/${item._id}`}> <button className="si-check-button">See availability</button>
-                    </Link>
+                    {/* <Link to={`/hostels/${item._id}`}> <button className="si-check-button">See availability</button>
+                    </Link> */}
                 </div>
             </div>
         </div>
