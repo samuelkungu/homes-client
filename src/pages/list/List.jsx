@@ -59,7 +59,7 @@ function List() {
 
                             </div>
                         </div>
-                        <button  >Search</button>
+                        <button >Search</button>
                     </div>
 
                     <div className="list-result">
