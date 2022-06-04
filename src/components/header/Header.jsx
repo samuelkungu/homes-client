@@ -1,31 +1,26 @@
 import './header.scss'
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed, faBuilding, faShop } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import Select from 'react-select'
-
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
+import { SearchContext } from "../../context/SearchContext";
 
 function Header({ type }) {
 
-    const [search, setSearch] = useState({
-        place: "",
-        property: "",
-        budget: "",
-    });
-    const handleChange = (event) => {
-        setSearch({
-            ...search, [event.target.name]: event.target.value
-        });
-    };
+    const [place, setPlace] = useState("");
+    const [property, setProperty] = useState("");
+    const [budget, setBudget] = useState("");
+
     const navigate = useNavigate();
+    const { dispatch } = useContext(SearchContext);
 
     const handleSearch = () => {
-        navigate("/hostels", { state: { search } })
+        dispatch({ type: "NEW_SEARCH", payload: { place, property, budget } });
+        navigate("/hostels", { state: { place, property, budget } })
     };
 
     return (
@@ -60,7 +55,7 @@ function Header({ type }) {
                         <div className="search-item">
                             <FormControl>
                                 <InputLabel className='label'>Location</InputLabel>
-                                <Select value={search.place} label="place" name="place" onChange={handleChange} className="options" >
+                                <Select value={place} label="place" name="place" onChange={(event) => setPlace(event.target.value)} className="options" >
                                     <MenuItem value={'Bomas'}> Bomas </MenuItem>
                                     <MenuItem value={'Kahawa'}> Kahawa </MenuItem>
                                     <MenuItem value={'Nyeriview'}> Nyeri View</MenuItem>
@@ -70,17 +65,17 @@ function Header({ type }) {
                         <div className="search-item">
                             <FormControl>
                                 <InputLabel className='label'>Property</InputLabel>
-                                <Select value={search.property} label="property" name="property" onChange={handleChange} className="options" >
+                                <Select value={property} label="property" name="property" onChange={(event) => setProperty(event.target.value)} className="options" >
                                     <MenuItem value={'Bedsitter'}> Bedsitter </MenuItem>
                                     <MenuItem value={'Singleroom'}> Single Room </MenuItem>
-                                    <MenuItem value={'Doubleroom'}> Single Room </MenuItem>
+                                    <MenuItem value={'Doubleroom'}> Double Room </MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
                         <div className="search-item">
                             <FormControl>
                                 <InputLabel className='label'>Budget</InputLabel>
-                                <Select value={search.budget} label="budget" name="budget" onChange={handleChange} className="options"  >
+                                <Select value={budget} label="budget" name="budget" onChange={(event) => setBudget(event.target.value)} className="options"  >
                                     <MenuItem value={3000}> Below 3k </MenuItem>
                                     <MenuItem value={5000}> Below 5k </MenuItem>
                                     <MenuItem value={7000}> Below 7k </MenuItem>

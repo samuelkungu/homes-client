@@ -3,6 +3,10 @@ import "./list.scss"
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from 'react-router';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import SearchItem from '../../components/searchItem/SearchItem';
 import useFetch from "../../hooks/useFetch"
 
@@ -10,17 +14,14 @@ function List() {
 
     const location = useLocation();
 
-    const [area, setArea] = useState(location.state.area);
+    const [place, setPlace] = useState(location.state.place);
     const [property, setProperty] = useState(location.state.property);
     const [budget, setBudget] = useState(location.state.budget);
 
-
-
-    const [min, setMin] = useState(undefined);
-    const [max, setMax] = useState(undefined);
+    const [max, setMax] = useState(location.state.budget);
 
     const { data, loading, error, reFetch } = useFetch(
-        `/hostels?areas=${area}&min=${min || 0}&max=${max || 99999}`
+        `/hostels?areas=${place}&max=${max || 99999}`
     );
 
     return (
@@ -35,30 +36,39 @@ function List() {
                         <h1 className="ls-title">Search</h1>
                         <div className="ls-item">
                             <label className="name">Destination</label>
-                            <input type="text" placeholder={area} />
+                            <FormControl>
+                                <InputLabel className='label'>Location</InputLabel>
+                                <Select value={place} label="place" name="place" onChange={(event) => setPlace(event.target.value)} className="options" >
+                                    <MenuItem value={'Bomas'}> Bomas </MenuItem>
+                                    <MenuItem value={'Kahawa'}> Kahawa </MenuItem>
+                                    <MenuItem value={'Nyeriview'}> Nyeri View</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                         <div className="ls-item">
                             <label className="name">Property Type</label>
-                            <input type="text" placeholder={property} />
+                            <FormControl>
+                                <InputLabel className='label'>Property</InputLabel>
+                                <Select value={property} label="property" name="property" onChange={(event) => setProperty(event.target.value)} className="options" >
+                                    <MenuItem value={'Bedsitter'}> Bedsitter </MenuItem>
+                                    <MenuItem value={'Singleroom'}> Single Room </MenuItem>
+                                    <MenuItem value={'Doubleroom'}> Double Room </MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                         <div className="ls-item">
-                            <label>Options</label>
-                            <div className="ls-options">
-                                <div className="ls-option-item">
-                                    <span className="ls-option-text">  Min price <small>per night</small> </span>
-                                    <input type="number" onChange={e => setMin(e.target.value)} className="ls-option-input" />
-                                </div>
-                                <div className="ls-option-item">
-                                    <span className="ls-option-text"> Max price <small>per night</small> </span>
-                                    <input type="number" onChange={e => setMax(e.target.value)} className="ls-option-input" />
-                                </div>
-                                <div className="ls-option-item">
-                                    <span className="ls-option-text">Budget</span>
-                                    <input type="number" min={1000} className="ls-option-input" placeholder={budget} />
-                                </div>
-
-                            </div>
+                            <label className="name">Budget</label>
+                            <FormControl>
+                                <InputLabel className='label'>Budget</InputLabel>
+                                <Select value={budget} label="budget" name="budget" onChange={(event) => setBudget(event.target.value)} className="options"  >
+                                    <MenuItem value={3000}> Below 3k </MenuItem>
+                                    <MenuItem value={5000}> Below 5k </MenuItem>
+                                    <MenuItem value={7000}> Below 7k </MenuItem>
+                                    <MenuItem value={9000}> Below 9k </MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
+
                         <button >Search</button>
                     </div>
 

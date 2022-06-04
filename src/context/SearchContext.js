@@ -1,9 +1,9 @@
 import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
-    area: undefined,
-    room: undefined,
-    amount: undefined,
+    place: undefined,
+    property: undefined,
+    budget: undefined,
 
 };
 
