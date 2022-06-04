@@ -87,22 +87,6 @@ function Header({ type }) {
                             <button onClick={handleSearch} className="options-btn">Search</button>
                         </div>
 
-                        {/* <div className="search-item">
-                            <Select options={place} name="place" value={search.place} onChange={handleSearchChange} className="options" placeholder='Destination' />
-                        </div>
-
-                        <div className="search-item">
-                            <Select options={property} name="property" value={search.property} onChange={handleSearchChange} className="options" placeholder='Property Type' />
-                        </div>
-
-                        <div className="search-item">
-                            <Select options={budget} name="budget" value={search.budget} onChange={handleSearchChange} className="options" placeholder='Your budget' />
-                        </div>
-
-                        <div className="search-item">
-                            <button onClick={handleSearch} className="options-btn">Search</button>
-                        </div> */}
-
                     </div>
                 </>}
 

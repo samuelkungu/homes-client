@@ -12,8 +12,14 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import useFetch from '../../hooks/useFetch';
+import { useLocation } from 'react-router-dom';
 
 function Hostel() {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const { data, loading, error, reFetch } = useFetch(`/hostels/find/${id}`);
+
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -59,87 +65,90 @@ function Hostel() {
     <div>
       <Navbar />
       <Header type="list" />
-      <div className="hostel-container">
-        {open && (
-          <div className="slider">
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              className="close"
-              onClick={() => setOpen(false)}
-            />
-            <FontAwesomeIcon
-              icon={faCircleArrowLeft}
-              className="arrow"
-              onClick={() => handleMove("l")}
-            />
-            <div className="slider-wrapper">
-              <img src={photos[slideNumber].src} alt="" className="slider-img" />
-            </div>
-            <FontAwesomeIcon
-              icon={faCircleArrowRight}
-              className="arrow"
-              onClick={() => handleMove("r")}
-            />
-          </div>
-        )}
-        <div className="hostel-wrapper">
-          <button className="book-now">Reserve or Book Now!</button>
-          <h1 className="hostel-title">Tower Street Apartments</h1>
-          <div className="hostel-address">
-            <FontAwesomeIcon icon={faLocationDot} />
-            <span>Tom Mboya St, Nairobi</span>
-          </div>
-          <span className="hotek-distance">
-            Excellent location – 500m from center
-          </span>
-          <span className="hostel-price-highlight">
-            Book a stay over $114 at this property and get a free airport taxi
-          </span>
-          <div className="hostel-images">
-            {photos.map((photo, i) => (
-              <div className="hostel-img-wrapper" key={i}>
-                <img
-                  onClick={() => handleOpen(i)}
-                  src={photo.src}
-                  alt=""
-                  className="hostel-img"
-                />
+      {loading ? (
+        "Loading"
+      ) : (
+        <div className="hostel-container">
+          {open && (
+            <div className="slider">
+              <FontAwesomeIcon
+                icon={faCircleXmark}
+                className="close"
+                onClick={() => setOpen(false)}
+              />
+              <FontAwesomeIcon
+                icon={faCircleArrowLeft}
+                className="arrow"
+                onClick={() => handleMove("l")}
+              />
+              <div className="slider-wrapper">
+                <img src={data.photos[slideNumber]} alt="" className="slider-img" />
               </div>
-            ))}
-          </div>
-          <div className="hostel-details">
-            <div className="hostel-details-texts">
-              <h1 className="hostel-title">Stay in the heart of City</h1>
-              <p className="hostel-desc">
-                Located a 5-minute walk from CBD in Nairobi, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Airport, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service.
-              </p>
+              <FontAwesomeIcon
+                icon={faCircleArrowRight}
+                className="arrow"
+                onClick={() => handleMove("r")}
+              />
             </div>
-            <div className="hostel-details-price">
-              <h1>Perfect for a 9-night stay!</h1>
-              <span>
-                Located in the real heart of Nairobi, this property has an
-                excellent location score of 9.8!
-              </span>
-              <h2>
-                <b>$945</b> (9 nights)
-              </h2>
-              <button>Reserve and Book Now!</button>
+          )}
+          <div className="hostel-wrapper">
+            <button className="book-now">Reserve or Book Now!</button>
+            <h1 className="hostel-title">{data.name}</h1>
+            <div className="hostel-address">
+              <FontAwesomeIcon icon={faLocationDot} />
+              <span>{data.address}</span>
+            </div>
+            <span className="hotek-distance">
+              Excellent location – {data.distance}m from center
+            </span>
+            <span className="hostel-price-highlight">
+              Book a stay over kshs.{data.cheapestPrice} at this property and get a free airport taxi
+            </span>
+            <div className="hostel-images">
+              {data.photos?.map((photo, i) => (
+                <div className="hostel-img-wrapper" key={i}>
+                  <img
+                    onClick={() => handleOpen(i)}
+                    src={photo}
+                    alt=""
+                    className="hostel-img"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="hostel-details">
+              <div className="hostel-details-texts">
+                <h1 className="hostel-title">{data.title}</h1>
+                <p className="hostel-desc">
+                  Located a 5-minute walk from CBD in Nairobi, Tower
+                  Street Apartments has accommodations with air conditioning and
+                  free WiFi. The units come with hardwood floors and feature a
+                  fully equipped kitchenette with a microwave, a flat-screen TV,
+                  and a private bathroom with shower and a hairdryer. A fridge is
+                  also offered, as well as an electric tea pot and a coffee
+                  machine. Popular points of interest near the apartment include
+                  Cloth Hall, Main Market Square and Town Hall Tower. The nearest
+                  airport is John Paul II International Airport, 16.1 km
+                  from Tower Street Apartments, and the property offers a paid
+                  airport shuttle service.
+                </p>
+              </div>
+              <div className="hostel-details-price">
+                <h1>Best price you can get!</h1>
+                <span>
+                  Located in the real heart of Nairobi, this property has an
+                  excellent location score of 9.8!
+                </span>
+                <h2>
+                  <b>kshs.{data.cheapestPrice} </b>
+                </h2>
+                <button>Reserve and Book Now!</button>
+              </div>
             </div>
           </div>
-        </div>
-        <MailList />
-        <Footer />
-      </div>
+          <MailList />
+          <Footer />
+        </div>)}
     </div>
   )
 }

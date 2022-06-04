@@ -2,9 +2,10 @@
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
-}
 
-.link {
-  text-decoration: none;
-  color: inherit;
+  .link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
 }
