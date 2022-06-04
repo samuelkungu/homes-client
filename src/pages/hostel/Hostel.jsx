@@ -98,11 +98,11 @@ function Hostel() {
               <FontAwesomeIcon icon={faLocationDot} />
               <span>{data.address}</span>
             </div>
-            <span className="hotek-distance">
+            <span className="hostel-distance">
               Excellent location – {data.distance}m from center
             </span>
             <span className="hostel-price-highlight">
-              Book a stay over kshs.{data.cheapestPrice} at this property and get a free airport taxi
+              Book a stay of kshs.{data.cheapestPrice} per month at this property and get a free wifi
             </span>
             <div className="hostel-images">
               {data.photos?.map((photo, i) => (
@@ -120,27 +120,16 @@ function Hostel() {
               <div className="hostel-details-texts">
                 <h1 className="hostel-title">{data.title}</h1>
                 <p className="hostel-desc">
-                  Located a 5-minute walk from CBD in Nairobi, Tower
-                  Street Apartments has accommodations with air conditioning and
-                  free WiFi. The units come with hardwood floors and feature a
-                  fully equipped kitchenette with a microwave, a flat-screen TV,
-                  and a private bathroom with shower and a hairdryer. A fridge is
-                  also offered, as well as an electric tea pot and a coffee
-                  machine. Popular points of interest near the apartment include
-                  Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                  airport is John Paul II International Airport, 16.1 km
-                  from Tower Street Apartments, and the property offers a paid
-                  airport shuttle service.
+                  {data.desc}
                 </p>
               </div>
               <div className="hostel-details-price">
                 <h1>Best price you can get!</h1>
                 <span>
-                  Located in the real heart of Nairobi, this property has an
-                  excellent location score of 9.8!
+                  Located in the real heart of Nyeriexcellent location score of 9.8!
                 </span>
                 <h2>
-                  <b>kshs.{data.cheapestPrice} </b>
+                  <b>kshs.{data.cheapestPrice} </b> / month
                 </h2>
                 <button>Reserve and Book Now!</button>
               </div>

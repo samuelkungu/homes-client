@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import "./login.scss";
 import Navbar from '../../components/navbar/Navbar';
-import './login.scss'
 
 function Login() {
-    const [inputs, setInputs] = useState({
+    const [credentials, setCredentials] = useState({
         email: "",
         password: "",
     });
 
-    const handleInputChange = (e) => {
-        e.preventDefault()
-        const { name, value } = e.target;
-        setInputs((prev) => ({ ...prev, [name]: value }));
+    const { user, loading, error, dispatch } = useContext(AuthContext);
+
+    const handleChange = (event) => {
+        setCredentials({
+            ...credentials, [event.target.id]: event.target.value
+        });
     };
 
-    const handleSubmit = () => {
-        console.log(inputs);
-    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch({ type: "LOGIN_START" })
+        try {
+            const res = axios.post("/auth/login", credentials);
+            dispatch({ type: "LOGIN_FAILURE", payload: res.data });
+        } catch (error) {
+            dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+        }
+        console.log(user);
+    };
+
+
 
 
     return (
@@ -32,17 +45,18 @@ function Login() {
                         <div className="heading">Sign In</div>
                         <div className="form-item">
                             <label className="label">Email address</label>
-                            <input name="email" type="text" className="input" placeholder="Enter your email"
-                                id="email" value={inputs.email} onChange={handleInputChange} />
+                            <input type="text" className="input" placeholder="Enter your email"
+                                id="email" value={credentials.email} onChange={handleChange} />
                         </div>
 
                         <div className="form-item">
                             <label className="label">Password</label>
-                            <input name="password" type="password" className="input" placeholder="Enter your password"
-                                id="password" value={inputs.password} onChange={handleInputChange} />
+                            <input type="password" className="input" placeholder="Enter your password"
+                                id="password" value={credentials.password} onChange={handleChange} />
                         </div>
 
                         <button className="btn" onClick={handleSubmit} >Sign in</button>
+                        {error && <span>{error.message}</span>}
                     </div>
 
                     <div className="sub-note">
