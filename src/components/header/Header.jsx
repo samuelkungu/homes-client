@@ -3,50 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed, faBuilding, faShop } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Select from 'react-select'
+// import Select from 'react-select'
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 function Header({ type }) {
 
-    const place = [
-        { value: 'bomas', label: 'Bomas' },
-        { value: 'kahawa', label: 'Kahawa' },
-        { value: 'nyeriview', label: 'Nyeri View' }
-    ];
-
-    const property = [
-        { value: 'bedsitter', label: 'Bedsitter' },
-        { value: 'singleroom', label: 'Single Room' },
-        { value: 'doubleroom', label: 'Double Room' }
-    ];
-
-    const budget = [
-        { value: '3000', label: 'Below 3k' },
-        { value: '5000', label: 'Below 5k' },
-        { value: '5001', label: 'more than 5k' }
-    ];
-
-    const [area, setArea] = useState(null)
-    const [room, setRoom] = useState(null)
-    const [amount, setAmount] = useState(null)
-
-
-    // const [selected, setSelected] = useState({
-    //     place: null,
-    //     property: null,
-    //     budget: null,
-    // })
-
-    const handleChange = (area, room, amount) => {
-        setArea(area);
-        setRoom(room)
-        setAmount(amount)
-        console.log({ area, room, amount });
+    const [search, setSearch] = useState({
+        place: "",
+        property: "",
+        budget: "",
+    });
+    const handleChange = (event) => {
+        setSearch({
+            ...search, [event.target.name]: event.target.value
+        });
     };
-
     const navigate = useNavigate();
 
     const handleSearch = () => {
-        navigate("/hostels", { state: { place, property, budget } })
+        navigate("/hostels", { state: { search } })
     };
 
     return (
@@ -79,20 +58,55 @@ function Header({ type }) {
 
                     <div className="search">
                         <div className="search-item">
-                            <Select options={place} onChange={handleChange} className="options" placeholder='Destination' />
+                            <FormControl>
+                                <InputLabel className='label'>Location</InputLabel>
+                                <Select value={search.place} label="place" name="place" onChange={handleChange} className="options" >
+                                    <MenuItem value={'Bomas'}> Bomas </MenuItem>
+                                    <MenuItem value={'Kahawa'}> Kahawa </MenuItem>
+                                    <MenuItem value={'Nyeriview'}> Nyeri View</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className="search-item">
+                            <FormControl>
+                                <InputLabel className='label'>Property</InputLabel>
+                                <Select value={search.property} label="property" name="property" onChange={handleChange} className="options" >
+                                    <MenuItem value={'Bedsitter'}> Bedsitter </MenuItem>
+                                    <MenuItem value={'Singleroom'}> Single Room </MenuItem>
+                                    <MenuItem value={'Doubleroom'}> Single Room </MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className="search-item">
+                            <FormControl>
+                                <InputLabel className='label'>Budget</InputLabel>
+                                <Select value={search.budget} label="budget" name="budget" onChange={handleChange} className="options"  >
+                                    <MenuItem value={3000}> Below 3k </MenuItem>
+                                    <MenuItem value={5000}> Below 5k </MenuItem>
+                                    <MenuItem value={7000}> Below 7k </MenuItem>
+                                    <MenuItem value={9000}> Below 9k </MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className="search-item">
+                            <button onClick={handleSearch} className="options-btn">Search</button>
+                        </div>
+
+                        {/* <div className="search-item">
+                            <Select options={place} name="place" value={search.place} onChange={handleSearchChange} className="options" placeholder='Destination' />
                         </div>
 
                         <div className="search-item">
-                            <Select options={property} onChange={handleChange} className="options" placeholder='Property Type' />
+                            <Select options={property} name="property" value={search.property} onChange={handleSearchChange} className="options" placeholder='Property Type' />
                         </div>
 
                         <div className="search-item">
-                            <Select options={budget} onChange={handleChange} className="options" placeholder='Your budget' />
+                            <Select options={budget} name="budget" value={search.budget} onChange={handleSearchChange} className="options" placeholder='Your budget' />
                         </div>
 
                         <div className="search-item">
                             <button onClick={handleSearch} className="options-btn">Search</button>
-                        </div>
+                        </div> */}
 
                     </div>
                 </>}

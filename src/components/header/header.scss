@@ -67,15 +67,23 @@
                 align-items: center;
                 justify-content: space-between;
                 height: 30px;
-                margin-left: 20px;
+                margin-left: 10px;
 
+                .label {
+                    color: #6e1db9;
+                    margin-bottom: 5px;
+                    font-size: 14px;
+
+                }
 
                 .options {
-                    z-index: 2;
-                    position: absolute;
+                    // z-index: 2;
+                    // position: absolute;
+
+                    height: 40px;
                     width: 300px;
                     background-color: rgb(255, 255, 255);
-                    color: rgb(66, 66, 66);
+                    // color: rgb(66, 66, 66);
                     border-radius: 50px;
 
                 }

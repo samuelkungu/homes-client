@@ -8,6 +8,7 @@ export const AuthContextProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider>
+
             {children}
         </AuthContext.Provider>
     )
