@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 function Header({ type }) {
 
@@ -17,6 +18,8 @@ function Header({ type }) {
 
     const navigate = useNavigate();
     const { dispatch } = useContext(SearchContext);
+    const { user } = useContext(AuthContext);
+
 
     const handleSearch = () => {
         dispatch({ type: "NEW_SEARCH", payload: { place, property, budget } });
@@ -49,8 +52,7 @@ function Header({ type }) {
                     < h1 className="header-title">
                         Looking for a place to stay? We've got you covered.
                     </h1>
-                    <button className="btn">Sign in / Register</button>
-
+                    {!user && <button className="btn">Sign in / Register</button>}
                     <div className="search">
                         <div className="search-item">
                             <FormControl>

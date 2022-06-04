@@ -1,7 +1,11 @@
 import './navbar.scss'
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from 'react';
 
-function Navbar({ type }) {
+function Navbar() {
+    const { user } = useContext(AuthContext);
+
     return (
         <div className='navbar'>
             <div className="nav-container">
@@ -9,7 +13,7 @@ function Navbar({ type }) {
                     <span className="logo">Dekut Homes</span>
                 </Link>
 
-                {type !== "auth" && <>
+                {user ? user.username : (<>
                     <div className="nav-items">
                         <Link to="/register" className='link'>
                             <button className="nav-btn">Register</button>
@@ -18,7 +22,7 @@ function Navbar({ type }) {
                             <button className="nav-btn">Login</button>
                         </Link>
                     </div>
-                </>}
+                </>)}
 
             </div>
         </div>

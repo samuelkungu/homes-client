@@ -11,7 +11,8 @@ function Login() {
         password: "",
     });
 
-    const { user, loading, error, dispatch } = useContext(AuthContext);
+    const { loading, error, dispatch } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setCredentials({
@@ -19,24 +20,22 @@ function Login() {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         dispatch({ type: "LOGIN_START" })
         try {
-            const res = axios.post("/auth/login", credentials);
+            const res = await axios.post("/auth/login", credentials);
             dispatch({ type: "LOGIN_FAILURE", payload: res.data });
+            navigate("/")
         } catch (error) {
             dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
         }
-        console.log(user);
+
     };
-
-
-
 
     return (
         <div>
-            <Navbar type="auth" />
+            <Navbar />
 
             <div className='login'>
                 <div className="login-container">
@@ -55,7 +54,7 @@ function Login() {
                                 id="password" value={credentials.password} onChange={handleChange} />
                         </div>
 
-                        <button className="btn" onClick={handleSubmit} >Sign in</button>
+                        <button className="btn" onClick={handleSubmit} disabled={loading} >Sign in</button>
                         {error && <span>{error.message}</span>}
                     </div>
 
