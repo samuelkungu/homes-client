@@ -12,10 +12,10 @@ export const SearchContext = createContext(INITIAL_STATE);
 const SearchReducer = (state, action) => {
     switch (action.type) {
         case "NEW_SEARCH":
-            return action.payload
+            return action.payload;
             break;
         case "RESET_SEARCH":
-            return INITIAL_STATE
+            return action.payload;
             break;
 
         default:

@@ -16,10 +16,11 @@ function Header({ type }) {
     const [property, setProperty] = useState("");
     const [budget, setBudget] = useState("");
 
-    const navigate = useNavigate();
-    const { dispatch } = useContext(SearchContext);
+
     const { user } = useContext(AuthContext);
 
+    const navigate = useNavigate();
+    const { dispatch } = useContext(SearchContext);
 
     const handleSearch = () => {
         dispatch({ type: "NEW_SEARCH", payload: { place, property, budget } });
@@ -69,8 +70,8 @@ function Header({ type }) {
                                 <InputLabel className='label'>Property</InputLabel>
                                 <Select value={property} label="property" name="property" onChange={(event) => setProperty(event.target.value)} className="options" >
                                     <MenuItem value={'Bedsitter'}> Bedsitter </MenuItem>
-                                    <MenuItem value={'Singleroom'}> Single Room </MenuItem>
-                                    <MenuItem value={'Doubleroom'}> Double Room </MenuItem>
+                                    <MenuItem value={'Single Room'}> Single Room </MenuItem>
+                                    <MenuItem value={'Double Room'}> Double Room </MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
@@ -82,6 +83,7 @@ function Header({ type }) {
                                     <MenuItem value={5000}> Below 5k </MenuItem>
                                     <MenuItem value={7000}> Below 7k </MenuItem>
                                     <MenuItem value={9000}> Below 9k </MenuItem>
+                                    <MenuItem value={10000}> Below 10k </MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

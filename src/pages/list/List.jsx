@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./list.scss"
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -9,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import SearchItem from '../../components/searchItem/SearchItem';
 import useFetch from "../../hooks/useFetch"
+import { SearchContext } from "../../context/SearchContext";
 
 function List() {
 
@@ -18,11 +20,17 @@ function List() {
     const [property, setProperty] = useState(location.state.property);
     const [budget, setBudget] = useState(location.state.budget);
 
-    const [max, setMax] = useState(location.state.budget);
-
     const { data, loading, error, reFetch } = useFetch(
-        `/hostels?areas=${place}&max=${max || 99999}`
+        `/hostels?area=${place}&type=${property}&max=${budget}`
     );
+
+    const navigate = useNavigate();
+    const { dispatch } = useContext(SearchContext);
+
+    const handleSearch = () => {
+        dispatch({ type: "RESET_SEARCH", payload: { place, property, budget } });
+        reFetch();
+    };
 
     return (
         <div>
@@ -51,8 +59,8 @@ function List() {
                                 <InputLabel className='label'>Property</InputLabel>
                                 <Select value={property} label="property" name="property" onChange={(event) => setProperty(event.target.value)} className="options" >
                                     <MenuItem value={'Bedsitter'}> Bedsitter </MenuItem>
-                                    <MenuItem value={'Singleroom'}> Single Room </MenuItem>
-                                    <MenuItem value={'Doubleroom'}> Double Room </MenuItem>
+                                    <MenuItem value={'Single Room'}> Single Room </MenuItem>
+                                    <MenuItem value={'Double Room'}> Double Room </MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
@@ -65,11 +73,12 @@ function List() {
                                     <MenuItem value={5000}> Below 5k </MenuItem>
                                     <MenuItem value={7000}> Below 7k </MenuItem>
                                     <MenuItem value={9000}> Below 9k </MenuItem>
+                                    <MenuItem value={10000}> Below 10k </MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
 
-                        <button >Search</button>
+                        <button onClick={handleSearch} >Search</button>
                     </div>
 
                     <div className="list-result">
