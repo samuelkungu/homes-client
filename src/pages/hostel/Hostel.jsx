@@ -107,7 +107,7 @@ function Hostel() {
             </div>
           )}
           <div className="hostel-wrapper">
-            <button className="book-now">Reserve or Book Now!</button>
+            <button onClick={handleClick} className="book-now">Reserve or Book Now!</button>
             <h1 className="hostel-title">{data.name}</h1>
             <div className="hostel-address">
               <FontAwesomeIcon icon={faLocationDot} />
